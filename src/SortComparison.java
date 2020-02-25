@@ -26,7 +26,7 @@
                greater than key, to one position ahead 
                of their current position */
             while (j >= 0 && a[j] > key) { 
-                arr[j + 1] = a[j]; 
+                a[j + 1] = a[j]; 
                 j = j - 1; 
             } 
             a[j + 1] = key; 
