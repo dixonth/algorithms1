@@ -1,7 +1,30 @@
+/*
+ * 	time(ms)			Insert 		Selection 		Merge Recursive 		Merge Iterative 		Quick
+ * 
+10 random				3			0				0						0						0
+
+100 random				0			0				0						.33						.33
+
+1000 random				3.67		3				0						.33						.33
+
+1000 few unique			2.33		.33				.33						0						.67
+
+1000 nearly ordered		0			.67				0						0						1
+
+1000 reverse order		.33			.33				.33						0						.33
+
+1000 sorted				0			.33				0						0						1
+*/
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
 
 //-------------------------------------------------------------------------
 /**
@@ -102,9 +125,78 @@ public class SortComparisonTest
      *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
      *
      */
-    public static void main(String[] args)
-    {
-        //TODO: implement this method
+    
+    
+    public static void main(String[] args) throws NumberFormatException, IOException {
+    	String[] fileNames = new String[7];
+    	fileNames[0] = "numbers10.txt";
+    	fileNames[1] = "numbers100.txt";
+    	fileNames[2] = "numbers1000.txt";
+    	fileNames[3] = "numbers1000Duplicates.txt";
+    	fileNames[4] = "numbersNearlyOrdered1000.txt";
+    	fileNames[5] = "numbersReverse1000.txt";
+    	fileNames[6] = "numbersSorted1000.txt";
+    	
+    	for (int j=0; j<7; j++) {
+	    	String inputFile=fileNames[j];
+	    	String intValue = inputFile.replaceAll("[^0-9]", "");
+	    	int fileLength = Integer.parseInt(intValue);
+	    	File myfile = new File(inputFile); 
+	    	BufferedReader abc = new BufferedReader(new FileReader(myfile));
+	    	double [] data = new double[fileLength];
+	    	String s;
+	    	Double d;
+	    	for (int i=0;i<fileLength; i++) {
+	    		s=abc.readLine();
+	    		d = Double.valueOf(s);
+	    	    data[i] = d;
+	    	}
+	    	abc.close();
+	    	
+	    	
+	    	long startTime = System.nanoTime();
+	    	SortComparison.insertionSort(data);
+	    	long endTime = System.nanoTime();
+	    	endTime = endTime/1000000;
+	    	startTime = startTime/1000000;
+	    	long duration = (endTime - startTime);
+	    	System.out.println("Time taken in for insert("+data.length+")txt:"+duration);
+	    	
+	    	startTime = System.nanoTime();
+	    	SortComparison.selectionSort(data);
+	    	endTime = System.nanoTime();
+	    	endTime = endTime/1000000;
+	    	startTime = startTime/1000000;
+	    	duration = (endTime - startTime);
+	    	System.out.println("Time taken in for select("+data.length+")txt:"+duration);
+	    	
+	    	startTime = System.nanoTime();
+	    	SortComparison.mergeSortIterative(data);
+	    	endTime = System.nanoTime();
+	    	endTime = endTime/1000000;
+	    	startTime = startTime/1000000;
+	    	duration = (endTime - startTime);
+	    	System.out.println("Time taken in for merge iter("+data.length+")txt:"+duration);
+	    	
+	    	startTime = System.nanoTime();
+	    	SortComparison.mergeSortRecursive(data);
+	    	endTime = System.nanoTime();
+	    	endTime = endTime/1000000;
+	    	startTime = startTime/1000000;
+	    	duration = (endTime - startTime);
+	    	System.out.println("Time taken in for merge rec("+data.length+")txt:"+duration);
+	    	
+	    	startTime = System.nanoTime();
+	    	SortComparison.quickSort(data);
+	    	endTime = System.nanoTime();
+	    	endTime = endTime/1000000;
+	    	startTime = startTime/1000000;
+	    	duration = (endTime - startTime);
+	    	System.out.println("Time taken in for quick("+data.length+")txt:"+duration);
+	    	
+	    	
+    	}
+    	
     }
 
 }

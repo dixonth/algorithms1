@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 // -------------------------------------------------------------------------
 
@@ -276,23 +271,9 @@ import java.util.List;
    
 
 
-    public static void main(String[] args) throws NumberFormatException, IOException {
-    	File myfile = new File("numbers10.txt"); 
-    	BufferedReader abc = new BufferedReader(new FileReader(myfile));
-    	List<Double> data = new ArrayList<Double>();
-    	String s;
-    	Double d;
-    	while((s=abc.readLine())!=null) {
-    		d = Double.valueOf(s);
-    	    data.add(d);
-    	    System.out.println(s);
-    	}
-    	abc.close();
-    	
-    	double[] a = new double[data.size()];
-    	a = data.toArray(a);
-    	
-    	insertionSort(a);
+    public static void main(String[] args)
+    {
+        //TODO: implement this method
     }
 
  }//end class
