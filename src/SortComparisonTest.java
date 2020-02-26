@@ -1,11 +1,11 @@
 /*
- * 	time(ms)			Insert 		Selection 		Merge Recursive 		Merge Iterative 		Quick
+ * 	time(ms)			Insert 		Selection 		Merge Iterative 		Merge Recursive 		Quick
  * 
-10 random				3			0				0						0						0
+10 random				.33			0				0						0						0
 
 100 random				0			0				0						.33						.33
 
-1000 random				3.67		3				0						.33						.33
+1000 random				3.67		.33				0						.33						.33
 
 1000 few unique			2.33		.33				.33						0						.67
 
@@ -14,6 +14,27 @@
 1000 reverse order		.33			.33				.33						0						.33
 
 1000 sorted				0			.33				0						0						1
+
+NOTE: some of the results were not what was expected. I think the decision to time it in milliseconds was strange and a bit confusing as 
+many of the values were 0, or varied hugely in my testing.
+
+a. Which of the sorting algorithms does the order of input have an impact on? Why?
+The order has an impact on the insertionSort, the run time is almost zero when nearly ordered because the algorithm only deals with values not in order.
+
+b. Which algorithm has the biggest difference between the best and worst performance, based
+on the type of input, for the input of size 1000? Why?
+Insertion Sort has the biggest difference between best and worst performance as its performance improves dramatically with the nearly ordered file.
+
+c. Which algorithm has the best/worst scalability, i.e., the difference in performance time
+based on the input size? Please consider only input files with random order for this answer.
+Selection sort and Insertion sort have the worst scalability.
+
+d. Did you observe any difference between iterative and recursive implementations of merge
+sort?
+I observed a worse scalability in in my implementation of recursive merge sort, but all of my results were strange so I'm not sure if this holds any weight.
+
+e. Which algorithm is the fastest for each of the 7 input files?
+There were algorithms that took 0ms for each of the input files. For 1000 random mergesort iterative was fastest. For 100 few unique, mergesort recursive was fastest.
 */
 import java.io.BufferedReader;
 import java.io.File;
@@ -157,42 +178,32 @@ public class SortComparisonTest
 	    	long startTime = System.nanoTime();
 	    	SortComparison.insertionSort(data);
 	    	long endTime = System.nanoTime();
-	    	endTime = endTime/1000000;
-	    	startTime = startTime/1000000;
-	    	long duration = (endTime - startTime);
-	    	System.out.println("Time taken in for insert("+data.length+")txt:"+duration);
+	    	long duration = (endTime - startTime)/1000000;
+	    	System.out.println("Time taken in for insert("+fileNames[j]+")txt:"+duration);
 	    	
 	    	startTime = System.nanoTime();
 	    	SortComparison.selectionSort(data);
 	    	endTime = System.nanoTime();
-	    	endTime = endTime/1000000;
-	    	startTime = startTime/1000000;
-	    	duration = (endTime - startTime);
-	    	System.out.println("Time taken in for select("+data.length+")txt:"+duration);
+	    	duration = (endTime - startTime)/1000000;
+	    	System.out.println("Time taken in for select("+fileNames[j]+")txt:"+duration);
 	    	
 	    	startTime = System.nanoTime();
 	    	SortComparison.mergeSortIterative(data);
 	    	endTime = System.nanoTime();
-	    	endTime = endTime/1000000;
-	    	startTime = startTime/1000000;
-	    	duration = (endTime - startTime);
-	    	System.out.println("Time taken in for merge iter("+data.length+")txt:"+duration);
+	    	duration = (endTime - startTime)/1000000;
+	    	System.out.println("Time taken in for merge iter("+fileNames[j]+")txt:"+duration);
 	    	
 	    	startTime = System.nanoTime();
 	    	SortComparison.mergeSortRecursive(data);
 	    	endTime = System.nanoTime();
-	    	endTime = endTime/1000000;
-	    	startTime = startTime/1000000;
-	    	duration = (endTime - startTime);
-	    	System.out.println("Time taken in for merge rec("+data.length+")txt:"+duration);
+	    	duration = (endTime - startTime)/1000000;
+	    	System.out.println("Time taken in for merge rec("+fileNames[j]+")txt:"+duration);
 	    	
 	    	startTime = System.nanoTime();
 	    	SortComparison.quickSort(data);
 	    	endTime = System.nanoTime();
-	    	endTime = endTime/1000000;
-	    	startTime = startTime/1000000;
-	    	duration = (endTime - startTime);
-	    	System.out.println("Time taken in for quick("+data.length+")txt:"+duration);
+	    	duration = (endTime - startTime)/1000000;
+	    	System.out.println("Time taken in for quick("+fileNames[j]+")txt:"+duration);
 	    	
 	    	
     	}
