@@ -1,4 +1,3 @@
-import static org.junit.Assert.assertEquals;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -106,7 +105,6 @@ public class SortComparisonTest
     public static void main(String[] args)
     {
         //TODO: implement this method
-    	int i =5;
     }
 
 }
